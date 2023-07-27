@@ -1,0 +1,22 @@
+version: '3'
+services:
+  mongo-1:
+    image: mongo
+    hostname: mongo-db1
+    container_name: mongo-node-1
+    restart: always
+    network_mode: host
+    volumes:
+      - /opt/mongo/db:/data/db
+      - /opt/mongo/configdb:/data/configdb
+      - /opt/mongo/mongod.conf:/etc/mongod.conf
+      - /opt//mongo/log/mongo-6:/var/log/mongo
+    command: mongod --config /etc/mongod.conf
+    privileged: true
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+      nproc:
+        soft: 65535
+        hard: 65535
